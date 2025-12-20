@@ -26,6 +26,11 @@
       "package": "ai.inkthis.app"
     },
     "owner": "thepines",
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "extra": {
+      "eas": {
+        "projectId": "8ec32b3f-868e-4f12-b393-4ca677fd6257"
+      }
+    }
   }
 }
