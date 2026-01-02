@@ -1,20 +1,20 @@
 /**
  * ChiRho - Daily Office App
- * 
+ *
  * This is a minimal wrapper that loads the web app in a WebView.
  * The actual app logic lives in the Next.js web app.
  */
 
-import React, { useEffect, useRef } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ActivityIndicator, View, Platform } from 'react-native';
-import { WebView } from 'react-native-webview';
-import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
-import Constants from 'expo-constants';
+import React, { useEffect, useRef } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, ActivityIndicator, View, Platform } from "react-native";
+import { WebView } from "react-native-webview";
+import * as Notifications from "expo-notifications";
+import * as Device from "expo-device";
+import Constants from "expo-constants";
 
 // Your deployed web app
-const WEB_APP_URL = 'https://inkthis.ai';
+const WEB_APP_URL = "https://inkthis.ai";
 
 // Configure how notifications appear when app is in foreground
 Notifications.setNotificationHandler({
@@ -28,7 +28,7 @@ Notifications.setNotificationHandler({
 // Register for push notifications and get token
 async function registerForPushNotifications(): Promise<string | null> {
   if (!Device.isDevice) {
-    console.log('Push notifications require a physical device');
+    console.log("Push notifications require a physical device");
     return null;
   }
 
@@ -36,20 +36,20 @@ async function registerForPushNotifications(): Promise<string | null> {
   const { status: existingStatus } = await Notifications.getPermissionsAsync();
   let finalStatus = existingStatus;
 
-  if (existingStatus !== 'granted') {
+  if (existingStatus !== "granted") {
     const { status } = await Notifications.requestPermissionsAsync();
     finalStatus = status;
   }
 
-  if (finalStatus !== 'granted') {
-    console.log('Permission not granted for push notifications');
+  if (finalStatus !== "granted") {
+    console.log("Permission not granted for push notifications");
     return null;
   }
 
   // Get Expo push token
   const projectId = Constants.expoConfig?.extra?.eas?.projectId;
   const token = await Notifications.getExpoPushTokenAsync({ projectId });
-  
+
   return token.data;
 }
 
@@ -60,23 +60,26 @@ export default function App() {
 
   // Register for push notifications on mount
   useEffect(() => {
-    registerForPushNotifications().then(token => {
+    registerForPushNotifications().then((token) => {
       if (token) {
         setPushToken(token);
-        console.log('Push token:', token);
+        console.log("Push token:", token);
       }
     });
 
     // Handle notification received while app is in foreground
-    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
-      console.log('Notification received:', notification);
-    });
+    const notificationListener = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log("Notification received:", notification);
+      }
+    );
 
     // Handle user tapping on notification
-    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('Notification tapped:', response);
-      // Could navigate to specific content based on notification data
-    });
+    const responseListener =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log("Notification tapped:", response);
+        // Could navigate to specific content based on notification data
+      });
 
     return () => {
       Notifications.removeNotificationSubscription(notificationListener);
@@ -85,7 +88,7 @@ export default function App() {
   }, []);
 
   // Build URL with push token if available
-  const webUrl = pushToken 
+  const webUrl = pushToken
     ? `${WEB_APP_URL}?pushToken=${encodeURIComponent(pushToken)}`
     : WEB_APP_URL;
 
@@ -93,13 +96,16 @@ export default function App() {
     <View style={styles.container}>
       {/* Translucent status bar - WebView goes edge-to-edge */}
       <StatusBar style="auto" translucent />
-      
+
       <WebView
         ref={webViewRef}
         source={{ uri: webUrl }}
         style={styles.webview}
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
+        // App detection - allows web app to know it's inside the native wrapper
+        applicationNameForUserAgent="InkThisApp/1.0"
+        injectedJavaScriptBeforeContentLoaded={`window.isInkThisApp = true; window.inkAppPlatform = '${Platform.OS}';`}
         // Enable JavaScript
         javaScriptEnabled={true}
         // Enable DOM storage for localStorage
@@ -127,16 +133,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: "#1a1a1a",
   },
   webview: {
     flex: 1,
   },
   loadingOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#1a1a1a',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#1a1a1a",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
-
