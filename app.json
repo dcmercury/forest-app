@@ -26,11 +26,12 @@
       "package": "ai.pineforest.app"
     },
     "owner": "thepines",
-    "plugins": ["expo-asset"],
-    
+    "plugins": [
+      "expo-asset"
+    ],
     "extra": {
       "eas": {
-        "projectId": "YOUR_EAS_PROJECT_ID"
+        "projectId": "ca44c9c2-b82c-4a3a-816a-7f00739ec509"
       }
     }
   }
