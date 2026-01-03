@@ -1,5 +1,5 @@
 /**
- * ChiRho - Daily Office App
+ *
  *
  * This is a minimal wrapper that loads the web app in a WebView.
  * The actual app logic lives in the Next.js web app.
@@ -14,7 +14,7 @@ import * as Device from "expo-device";
 import Constants from "expo-constants";
 
 // Your deployed web app
-const WEB_APP_URL = "https://inkthis.ai";
+const WEB_APP_URL = "https://pineforest.ai";
 
 // Configure how notifications appear when app is in foreground
 Notifications.setNotificationHandler({
@@ -104,8 +104,8 @@ export default function App() {
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
         // App detection - allows web app to know it's inside the native wrapper
-        applicationNameForUserAgent="InkThisApp/1.0"
-        injectedJavaScriptBeforeContentLoaded={`window.isInkThisApp = true; window.inkAppPlatform = '${Platform.OS}';`}
+        applicationNameForUserAgent="PineForestApp/1.0"
+        injectedJavaScriptBeforeContentLoaded={`window.isPineForestApp = true; window.forestAppPlatform = '${Platform.OS}';`}
         // Enable JavaScript
         javaScriptEnabled={true}
         // Enable DOM storage for localStorage

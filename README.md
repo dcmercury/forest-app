@@ -1,6 +1,6 @@
-# InkThis App
+# PineForest App
 
-Expo WebView wrapper for [inkthis.ai](https://inkthis.ai).
+Expo WebView wrapper for [pineforest.ai](https://pineforest.ai).
 
 ## Build
 
@@ -23,6 +23,6 @@ npx expo start
 
 ## Configuration
 
-- **Expo Project:** @thepines/inkthis
-- **iOS Bundle ID:** com.thepines.inkthis
-- **Android Package:** ai.inkthis.app
+- **Expo Project:** @thepines/pineforest
+- **iOS Bundle ID:** com.thepines.pineforest
+- **Android Package:** ai.pineforest.app

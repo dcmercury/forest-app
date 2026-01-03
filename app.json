@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "InkThis",
-    "slug": "inkthis",
+    "name": "PineForest",
+    "slug": "pineforest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +13,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.thepines.inkthis",
+      "bundleIdentifier": "com.thepines.pineforest",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -23,14 +23,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1a1a1a"
       },
-      "package": "ai.inkthis.app"
+      "package": "ai.pineforest.app"
     },
     "owner": "thepines",
     "plugins": ["expo-asset"],
     
     "extra": {
       "eas": {
-        "projectId": "8ec32b3f-868e-4f12-b393-4ca677fd6257"
+        "projectId": "YOUR_EAS_PROJECT_ID"
       }
     }
   }
