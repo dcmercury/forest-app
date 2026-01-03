@@ -13,8 +13,8 @@ import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
 
-// Your deployed web app
-const WEB_APP_URL = "https://pineforest.ai";
+// Your deployed web app - defaults to mobile app interface
+const WEB_APP_URL = "https://pineforest.ai/mobile";
 
 // Configure how notifications appear when app is in foreground
 Notifications.setNotificationHandler({
